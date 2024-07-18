@@ -1,24 +1,58 @@
-# README
+# users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column       | Type       | Options           |
+| ------------ | ---------- | ----------------- |
+| Nickname     | string     | null: false       |
+| Email        | string     | null: false, unique: true |
+| Password     | string     | null: false       |
+| First_name1  | string     | null: false       |
+| Last_name1   | string     | null: false       |
+| First_name2  | string     | null: false       |
+| Last_name2   | string     | null: false       |
+| Birth_year   | integer    | null: false       |
+| Birth_month  | integer    | null: false       |
+| Birth_date   | integer    | null: false       |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :orders
 
-* Ruby version
+# items テーブル
 
-* System dependencies
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| name         | string     | null: false                    |
+| Price        | integer    | null: false                    |
+| Image        | string     | null: false                    |
+| comment      | text       | null: false                    |
+| user_id      | references | null: false, foreign_key: true |
 
-* Configuration
+### Association
+- belongs_to :user
+- has_one :orders
 
-* Database creation
+# orders テーブル
 
-* Database initialization
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user_id   | references | null: false, foreign_key: true |
+| item_id   | references | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
-* Services (job queues, cache servers, search engines, etc.)
+# address テーブル
 
-* Deployment instructions
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| Postal_code  | string     | null: false                    |
+| City         | string     | null: false                    |
+| address_line1| string     | null: false                    |
+| address_line2| string     | null: false                    |
+| Phone_number | string     | null: false                    |
+| use_id       | references | null: false, foreign_key: true |
 
-* ...
+### Association
+- belongs_to :order
