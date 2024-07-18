@@ -1,17 +1,15 @@
 # users テーブル
 
-| Column       | Type       | Options           |
-| ------------ | ---------- | ----------------- |
-| Nickname     | string     | null: false       |
-| Email        | string     | null: false, unique: true |
-| Password     | string     | null: false       |
-| First_name1  | string     | null: false       |
-| Last_name1   | string     | null: false       |
-| First_name2  | string     | null: false       |
-| Last_name2   | string     | null: false       |
-| Birth_year   | integer    | null: false       |
-| Birth_month  | integer    | null: false       |
-| Birth_date   | integer    | null: false       |
+| Column       | Type       | Options                   |
+| ------------ | ---------- | ------------------------- |
+| nickname     | string     | null: false               |
+| email        | string     | null: false, unique: true |
+| password     | string     | null: false               |
+| first_name1  | string     | null: false               |
+| last_name1   | string     | null: false               |
+| first_name2  | string     | null: false               |
+| last_name2   | string     | null: false               |
+| birth_day    | date       | null: false               |
 
 ### Association
 - has_many :items
@@ -19,24 +17,33 @@
 
 # items テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| name         | string     | null: false                    |
-| Price        | integer    | null: false                    |
-| Image        | string     | null: false                    |
-| comment      | text       | null: false                    |
-| user_id      | references | null: false, foreign_key: true |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| name                | string     | null: false                    |
+| price               | integer    | null: false                    |
+| image               | string     | null: false                    |
+| comment             | text       | null: false                    |
+| user                | references | null: false, foreign_key: true |
+| category            | references | null: false, foreign_key: true |
+| condition           | references | null: false, foreign_key: true |
+| shipping_area       | references | null: false, foreign_key: true |
+| shipping_days       | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- has_one :orders
+- belongs_to :category
+- belongs_to :condition
+- belongs_to :shipping_payer
+- belongs_to :shipping_area
+- belongs_to :shipping_days
+- has_one :order
 
 # orders テーブル
 
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
-| user_id   | references | null: false, foreign_key: true |
-| item_id   | references | null: false, foreign_key: true |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -47,12 +54,13 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| Postal_code  | string     | null: false                    |
-| City         | string     | null: false                    |
+| postal_code  | string     | null: false                    |
+| prefecture   | string     | null: false                    |
+| city         | string     | null: false                    |
 | address_line1| string     | null: false                    |
 | address_line2| string     | null: false                    |
-| Phone_number | string     | null: false                    |
-| use_id       | references | null: false, foreign_key: true |
+| phone_number | string     | null: false                    |
+| order        | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
