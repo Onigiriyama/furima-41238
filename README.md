@@ -23,11 +23,11 @@
 | price             | integer    | null: false                    |
 | comment           | text       | null: false                    |
 | user              | references | null: false, foreign_key: true |
-| category_id       | integer    | null: false, foreign_key: true |
-| condition_id      | integer    | null: false, foreign_key: true |
-| shipping_payer_id | integer    | null: false, foreign_key: true |
-| prefecture_id     | integer    | null: false, foreign_key: true |
-| shipping_day_id   | integer    | null: false, foreign_key: true |
+| category_id       | integer    | null: false,                   |
+| condition_id      | integer    | null: false,                   |
+| shipping_payer_id | integer    | null: false,                   |
+| prefecture_id     | integer    | null: false,                   |
+| shipping_day_id   | integer    | null: false,                   |
 
 ### Association
 - belongs_to :user
