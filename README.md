@@ -26,6 +26,7 @@
 | user                | references | null: false, foreign_key: true |
 | category            | references | null: false, foreign_key: true |
 | condition           | references | null: false, foreign_key: true |
+| shipping_payer      | references | null: false, foreign_key: true |
 | shipping_area       | references | null: false, foreign_key: true |
 | shipping_days       | references | null: false, foreign_key: true |
 
