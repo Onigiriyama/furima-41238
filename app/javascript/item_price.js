@@ -3,7 +3,6 @@ const price = () => {
   if (priceInput) {
     priceInput.addEventListener("input", () => {
       const inputValue = priceInput.value;
-      console.log(inputValue);
       const addTaxDom = document.getElementById("add-tax-price");
       if (addTaxDom) {
         addTaxDom.innerHTML = Math.floor(inputValue * 0.1);

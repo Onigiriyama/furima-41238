@@ -32,7 +32,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーの情報がなければ出品できない' do
-        @item.category_id = nil
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
@@ -44,19 +44,19 @@ RSpec.describe Item, type: :model do
       end
 
       it '配送料の負担の情報がなければ出品できない' do
-        @item.shipping_payer_id = nil
+        @item.shipping_payer_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping payer can't be blank")
       end
 
       it '発送元の地域の情報がなければ出品できない' do
-        @item.prefecture_id = nil
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
 
       it '発送までの日数の情報がなければ出品できない' do
-        @item.shipping_day_id = nil
+        @item.shipping_day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
@@ -83,6 +83,12 @@ RSpec.describe Item, type: :model do
         @item.price = '１０００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'userが紐づいていない場合保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
