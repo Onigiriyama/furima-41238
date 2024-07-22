@@ -1,7 +1,6 @@
 <%= render "shared/second-header"%>
 
 <%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
-
 <div class='form-wrap'>
   <div class='form-header'>
     <h1 class='form-header-text'>
@@ -75,16 +74,19 @@
     </div>
     <div class='input-birth-wrap'>
       <%= raw sprintf(
-                  f.date_select(
-                    :birth_day,
-                    class:'select-birth',
-                    id:"birth-date",
-                    use_month_numbers: true,
-                    prompt:'--',
-                    start_year: 1930,
-                    end_year: (Time.now.year - 5),
-                    date_separator: '%s'),
-                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+            f.date_select(
+              :birth_day,
+              order: [:year, :month, :day],
+              class: 'select-birth',
+              id: "birth-date",
+              use_month_numbers: true,
+              prompt: '--',
+              start_year: 1930,
+              end_year: Time.now.year - 5,
+              date_separator: '%s'
+            ),
+            "<p> 年 </p>", "<p> 月 </p>"
+          ) + "<p> 日 </p>" %>
     </div>
     <p class='info-text'>※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。</p>
   </div>
