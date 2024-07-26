@@ -6,8 +6,6 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    validates :email, uniqueness: true
-    validates :encrypted_password
     validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'must be full-width characters' }
     validates :last_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'must be full-width characters' }
     validates :first_name_kana, format: { with: /\A[ァ-ヶー]+\z/, message: 'must be full-width katakana characters' }
@@ -16,4 +14,7 @@ class User < ApplicationRecord
   end
 
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'must include both letters and numbers' }
+
+  has_many :items
+  has_many :orders
 end
